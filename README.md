@@ -22,7 +22,7 @@ An example command would be:
 
 `estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 100_000 -s 8 > heliconius_Am_8.out`
 
-Note that value for `-s` is equivalent to block_size = (2 * value) + 1. For example, searching 4 bases either side of a hetAB mutation is equivalent to a block size of 9 bases. It is always recommended to calculate A<sub>m</sub> across a range of blocksize.
+Note that a given value of `-s` corresponds to block_size = (2 * value) + 1. For example, searching 4 bases either side of a hetAB mutation is equivalent to a block size of 9 bases. It is always recommended to calculate A<sub>m</sub> across a range of block sizes.
 
 The script requires the modules `docopt`, `scikit-allel` and `numpy` which can all be installed through conda.
 
