@@ -5,7 +5,7 @@ The Mathematica notebook shows how the generating function of genealogical branc
 
 The python notebooks use coalescent simulations with msprime to estimate A<sub>m</sub> for arbitrary demographic histories, block sizes and recombination rates. Notebook 1 lays out the general approach, while notebooks 2-4 simulate specific demographic histories.
 
-The script `estimate_Am.py` can be used to estimate A<sub>m</sub> from a (filtered) VCF file.
+The script `estimate_Am.py` can be used to estimate A<sub>m</sub> from a (filtered) VCF file. The VCF does not have to have a tabix index, but the script is much faster if there is one.
 
 ```
 [Options]
@@ -20,10 +20,16 @@ The script `estimate_Am.py` can be used to estimate A<sub>m</sub> from a (filter
 
 An example command would be:
 
-`estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 100_000 -s 8 > heliconius_Am_8.out`
+`estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 1_000_000 -s 8 > heliconius_Am_8.out`
 
-Note that a given value of `-s` corresponds to block_size = (2 * value) + 1. For example, searching 4 bases either side of a hetAB mutation is equivalent to a block size of 9 bases. It is always recommended to calculate A<sub>m</sub> across a range of block sizes.
+Note that a given value of `-s` corresponds to block_size = (2 * value) + 1. For example, searching 4 bases either side of a hetAB mutation is equivalent to a block size of 9 bases. It is always recommended to calculate A<sub>m</sub> across a range of block sizes. This can be done using a loop, although this is much slower than submiting commands in parallel.
 
-The script requires the modules `docopt`, `scikit-allel` and `numpy` which can all be installed through conda.
+`for i in 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768;
+    do echo -en "For $i bases either side\t" &&
+    estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 1_000_000 -s $i; done | grep "Final" > heliconius_Am.out`
+
+The script requires the modules `docopt`, `scikit-allel` and `numpy`, as well as tabix from htslib. These can all be installed via conda.
+
+`conda install conda-forge::docopt conda-forge::scikit-allel anaconda::numpy bioconda::tabix`
 
 
