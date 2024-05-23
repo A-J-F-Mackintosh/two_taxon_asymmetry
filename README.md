@@ -25,8 +25,7 @@ An example command would be:
 Note that a given value of `-s` corresponds to block_size = (2 * value) + 1. For example, searching 4 bases either side of a hetAB mutation is equivalent to a block size of 9 bases. It is always recommended to calculate A<sub>m</sub> across a range of block sizes. This can be done using a loop, although this is much slower than submiting commands in parallel.
 
 `for i in 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768;
-    do echo -en "For $i bases either side\t" &&
-    estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 1_000_000 -s $i; done | grep "Final" > heliconius_Am.out`
+    do estimate_Am.py -v heliconius_20220202.vcf.gz -a ros.CJ2071.m -b chi.CJ565.m -j 1_000_000 -s $i; done | grep "Final" > heliconius_Am.out`
 
 The script requires the modules `docopt`, `scikit-allel` and `numpy`, as well as tabix from htslib. These can all be installed via conda.
 
