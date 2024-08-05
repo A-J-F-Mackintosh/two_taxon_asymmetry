@@ -3,7 +3,7 @@ This repository contains Mathematica and python notebooks associated with Mackin
 
 The Mathematica notebook shows how the generating function of genealogical branch lengths ([Lohse et al. 2011](https://academic.oup.com/genetics/article/189/3/977/6063839)) can be used to obtain (both marginal and conditional) expectations for the length of external branches, and therefore A<sub>m</sub>.
 
-The python notebooks use coalescent simulations with msprime ([Baumdicker et al. 2021](https://academic.oup.com/genetics/article/220/3/iyab229/6460344)) to estimate A<sub>m</sub> for arbitrary demographic histories, block sizes and recombination rates. Notebook 1 lays out the general approach, while notebooks 2-4 simulate specific demographic histories.
+The python notebooks use coalescent simulations with msprime ([Baumdicker et al. 2021](https://academic.oup.com/genetics/article/220/3/iyab229/6460344)) to estimate A<sub>m</sub> for arbitrary demographic histories, block sizes and recombination rates. Notebook 1 lays out the general approach, while notebooks 2-4 simulate specific demographic histories. Notebook 5 explores the non-monotone behaviour of A<sub>m</sub> under a model of migration with asymmetric population sizes. 
 
 The script `estimate_Am.py` can be used to estimate A<sub>m</sub> from a (filtered) VCF file. The VCF does not have to have a tabix index, but the script is much faster if there is one.
 
