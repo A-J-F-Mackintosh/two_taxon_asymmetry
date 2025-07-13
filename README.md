@@ -3,7 +3,9 @@ This repository contains Mathematica and python notebooks associated with Mackin
 
 The Mathematica notebook shows how the generating function of genealogical branch lengths ([Lohse et al. 2011](https://academic.oup.com/genetics/article/189/3/977/6063839)) can be used to obtain (both marginal and conditional) expectations for the length of external branches, and therefore A<sub>m</sub>.
 
-The python notebooks use coalescent simulations with msprime ([Baumdicker et al. 2021](https://academic.oup.com/genetics/article/220/3/iyab229/6460344)) to estimate A<sub>m</sub> for arbitrary demographic histories, block sizes and recombination rates. Notebook 1 lays out the general approach, while notebooks 2-4 simulate specific demographic histories. Notebook 5 explores the non-monotone behaviour of A<sub>m</sub> under a model of migration with asymmetric population sizes. 
+The python notebooks use coalescent simulations with msprime ([Baumdicker et al. 2021](https://academic.oup.com/genetics/article/220/3/iyab229/6460344)) to estimate A<sub>m</sub> for arbitrary demographic histories, block sizes and recombination rates. Notebook 1 lays out the general approach, while notebooks 2-4 simulate specific demographic histories. Notebook 5 explores the non-monotone behaviour of A<sub>m</sub> under a model of migration with asymmetric population sizes.
+
+### Estimating A<sub>m</sub> from data
 
 The script `estimate_Am.py` can be used to estimate A<sub>m</sub> from a (filtered) VCF file. The VCF does not have to have a tabix index, but the script is much faster if there is one.
 
@@ -31,4 +33,11 @@ The script requires the modules `docopt`, `scikit-allel` and `numpy`, as well as
 
 `conda install conda-forge::docopt conda-forge::scikit-allel anaconda::numpy bioconda::tabix`
 
+### How to interpret A<sub>m</sub> estimates
+
+The A<sub>m</sub> statistic is expected to equal zero in the absence of gene flow. However, the statistic can diverge from zero if recombination is frequent within blocks. The figure below shows estimates of A<sub>m</sub> for three different simulated demographic histories. Evidence for gene flow in **A** and **C** comes from non-zero values of A<sub>m</sub> at short block sizes, where recombination is rare. In **B**, where there has been no gene flow, A<sub>m</sub> is indistinguishable from zero when calculated in short blocks.
+
+The results in **C** are particularly strong evidence for gene flow, as the non-monotonic pattern cannot be explained by recombination and unequal effective population sizes.
+
+<img width="12205" height="14331" alt="recomb_Am_fig" src="https://github.com/user-attachments/assets/3c34d227-64b4-40bc-96f5-f5e6a5805c87" />
 
